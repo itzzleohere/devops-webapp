@@ -18,3 +18,10 @@ jobs:
 
     - name: Test Step
       run: echo "No errors found"
+      
+    - name: Notify Slack
+      if: always()
+      run: |
+        curl -X POST -H 'Content-type: application/json' \
+        --data '{"text":"GitHub Actions Build Completed Successfully!"}' \
+        ${{ secrets.SLACK_WEBHOOK_URL }}
